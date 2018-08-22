@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180820045423) do
+ActiveRecord::Schema.define(version: 20180822153607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,18 +24,13 @@ ActiveRecord::Schema.define(version: 20180820045423) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "community_memebers", force: :cascade do |t|
-    t.integer "community_id"
-    t.integer "member_id"
+  create_table "community_users", force: :cascade do |t|
+    t.bigint "community_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "community_organizers", force: :cascade do |t|
-    t.integer "community_id"
-    t.integer "organizer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_community_users_on_community_id"
+    t.index ["user_id"], name: "index_community_users_on_user_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -62,15 +57,16 @@ ActiveRecord::Schema.define(version: 20180820045423) do
     t.string "title"
     t.text "content"
     t.string "image"
-    t.date "event_day"
-    t.time "open_time"
-    t.time "close_time"
     t.integer "maximum_number_of_people"
     t.datetime "deadline_of_participant_for_event"
-    t.integer "receptionist"
     t.integer "community_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "opening_time"
+    t.datetime "ending_time"
+    t.boolean "receptionist"
+    t.date "event_day"
+    t.boolean "beginig_of_the_event_day"
   end
 
   create_table "users", force: :cascade do |t|
@@ -90,6 +86,8 @@ ActiveRecord::Schema.define(version: 20180820045423) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "community_users", "communities"
+  add_foreign_key "community_users", "users"
   add_foreign_key "contacts", "communities"
   add_foreign_key "contacts", "events"
   add_foreign_key "contacts", "users"

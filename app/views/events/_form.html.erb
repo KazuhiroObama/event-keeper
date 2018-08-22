@@ -22,43 +22,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image, id: :event_image %>
-  </div>
-
-  <div class="field">
-    <%= form.label :event_day %>
-    <%= form.date_select :event_day, id: :event_event_day %>
-  </div>
-
-  <div class="field">
-    <%= form.label :open_time %>
-    <%= form.time_select :open_time, id: :event_open_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :close_time %>
-    <%= form.time_select :close_time, id: :event_close_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :maximum_number_of_people %>
-    <%= form.number_field :maximum_number_of_people, id: :event_maximum_number_of_people %>
-  </div>
-
-  <div class="field">
-    <%= form.label :deadline_of_participant_for_event %>
-    <%= form.datetime_select :deadline_of_participant_for_event, id: :event_deadline_of_participant_for_event %>
-  </div>
-
-  <div class="field">
-    <%= form.label :receptionist %>
-    <%= form.number_field :receptionist, id: :event_receptionist %>
-  </div>
-
-  <div class="field">
-    <%= form.label :organizer_id %>
-    <%= form.number_field :organizer_id, id: :event_organizer_id %>
+    <%= form.label :opening_time %>
+    <%= form.datetime_select :opening_time, id: :event_opening_time %>
   </div>
 
   <div class="actions">

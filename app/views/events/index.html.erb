@@ -1,40 +1,27 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Events</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Image</th>
-      <th>Event day</th>
-      <th>Open time</th>
-      <th>Close time</th>
-      <th>Maximum number of people</th>
-      <th>Deadline of participant for event</th>
-      <th>Receptionist</th>
-      <th>Organizer</th>
-      <th colspan="3"></th>
+      <th>日付</th>
+      <th>タイトル</th>
+      <th>内容</th>
+      <th>開始時間</th>
     </tr>
   </thead>
 
   <tbody>
     <% @events.each do |event| %>
       <tr>
+        <td><%= event.event_day %></td>
         <td><%= event.title %></td>
         <td><%= event.content %></td>
-        <td><%= image_tag event.image %></td>
-        <td><%= event.event_day %></td>
-        <td><%= event.open_time %></td>
-        <td><%= event.close_time %></td>
-        <td><%= event.maximum_number_of_people %></td>
-        <td><%= event.deadline_of_participant_for_event %></td>
-        <td><%= event.receptionist %></td>
-        <td><%= event.organizer_id %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= event.opening_time %></td>
+        <td>
+          <%= link_to 'Show', event %>
+          <%= link_to 'Edit', edit_event_path(event) %>
+          <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

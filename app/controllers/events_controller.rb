@@ -1,10 +1,13 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  after_action :set_event_day, only: [:create, :update]
 
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.order(:opening_time)
+    @first_events = Event.first_days_events_pluck
+    # @events = Event.order(:event_day)
   end
 
   # GET /events/1
@@ -69,6 +72,22 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :content, :image, :event_day, :open_time, :close_time, :maximum_number_of_people, :deadline_of_participant_for_event, :receptionist, :organizer_id)
+      params.require(:event).permit(:title,
+                                    :content,
+                                    :image,
+                                    :opening_time,
+                                    :close_time,
+                                    :maximum_number_of_people,
+                                    :deadline_of_participant_for_event,
+                                    :receptionist,
+                                    :organizer_id
+                                   )
+    end
+
+    def set_event_day
+      @event.update("event_day(1i)"=> @event.opening_time.year.to_s,
+                    "event_day(2i)"=> @event.opening_time.month.to_s,
+                    "event_day(3i)"=> @event.opening_time.day.to_s
+                   )
     end
 end

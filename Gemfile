@@ -20,6 +20,8 @@ gem 'devise'
 #画像投稿機能
 gem 'carrierwave'
 gem 'mini_magick'
+#テストデータ
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
