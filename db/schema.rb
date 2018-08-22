@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180822153607) do
+ActiveRecord::Schema.define(version: 20180822160441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 20180822153607) do
     t.string "image"
     t.integer "maximum_number_of_people"
     t.datetime "deadline_of_participant_for_event"
-    t.integer "community_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "opening_time"
@@ -67,6 +66,8 @@ ActiveRecord::Schema.define(version: 20180822153607) do
     t.boolean "receptionist"
     t.date "event_day"
     t.boolean "beginig_of_the_event_day"
+    t.bigint "community_id"
+    t.index ["community_id"], name: "index_events_on_community_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,4 +92,5 @@ ActiveRecord::Schema.define(version: 20180822153607) do
   add_foreign_key "contacts", "communities"
   add_foreign_key "contacts", "events"
   add_foreign_key "contacts", "users"
+  add_foreign_key "events", "communities"
 end

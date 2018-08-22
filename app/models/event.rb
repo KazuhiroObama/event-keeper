@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   has_many :event_participants
   has_many :user, through: :event_participants
   has_many :contacts
+  belongs_to :community
 
   def self.first_days_events_pluck
     first_events = []
